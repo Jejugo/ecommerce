@@ -1,0 +1,22 @@
+@import "../../assets/styles/main.scss";
+
+.lastVisit {
+  &__title {
+    font-size: $bigFont;
+    font-weight: 300;
+    color: $black;
+  }
+}
+
+.line {
+  width: 50%;
+  margin: 5% auto;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}

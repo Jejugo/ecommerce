@@ -1,0 +1,10 @@
+@import '../../assets/styles/main.scss';
+
+.offers{
+
+  &__title{
+    font-size: $bigFont;
+    font-weight: 300;
+    color: $black;
+  }
+}

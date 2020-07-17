@@ -1,0 +1,19 @@
+@import '../../../assets/styles/main.scss';
+
+.purchaseList{
+
+  .purchaseList__list{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    
+    &_item{
+      width: 80%;
+      margin: 20px 0;
+      list-style: none;
+      height: 100px;
+      border: 1px solid #ccc;
+      color: $black;
+    }
+  }
+}

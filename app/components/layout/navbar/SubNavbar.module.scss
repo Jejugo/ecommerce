@@ -8,10 +8,39 @@
 
   &__list{
     list-style: none;
-    justify-content: center;
+    padding: 0;
+    justify-content: flex-start;
     
     &_items{
       margin-right: 50px;
+      
+      &_link{
+        color: inherit;
+        text-decoration: none;
+        color: $grey;
+        font-weight: $veryLightWeight;
+      }
+    }
+  }
+
+  &__space{
+    flex: 1
+  }
+
+  &__moreItems{
+    flex: 2;
+  }
+
+  &__authenticationItems{
+    flex: 1;
+    justify-content: flex-end;
+
+    &_list{
+      
+      &_item{
+        margin: 0 20px;
+        list-style: none;
+      }
     }
   }
 }

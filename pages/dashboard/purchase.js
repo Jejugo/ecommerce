@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Head from 'next/head'
-import Navbar from "../app/components/layout/navbar/Navbar";
-import Layout from "../app/components/layout/Layout";
-import SideNav from "../app/components/side-navbar/SideNav";
+import Layout from "../../app/components/layout/Layout";
+import SideNav from "../../app/components/side-navbar/SideNav";
+import DashContainer from "../../app/components/layout/dash-container/DashContainer";
+import PurchaseComponent from "../../app/features/purchase/PurchaseComponent";
 
-export default class dashboard extends Component {
+export default class Purchase extends Component {
   constructor() {
     super();
 
@@ -23,7 +24,10 @@ export default class dashboard extends Component {
           ></link>
         </Head>
         <Layout>
-          <SideNav />
+          <SideNav selected={"purchase"}/>
+          <DashContainer>
+            <PurchaseComponent />
+          </DashContainer>
         </Layout>
       </section>
     );

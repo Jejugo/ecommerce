@@ -1,0 +1,13 @@
+@import '../../assets/styles/main.scss';
+
+.purchase{
+
+  width: 70%;
+  margin: 2% auto;
+
+  &__title{
+    color: $black;
+    font-size: $bigFont;
+    font-weight: 300;
+  }
+}

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Layout from '../app/components/layout/Layout'
 import CarouselComponent from '../app/components/carousel/Carousel'
 import LastVisit from '../app/components/last-visit/LastVisit'
-import PageContainer from '../app/components/layout/page-container/PageContainer'
+import PageContainer from '../app/components/layout/main-container/PageContainer'
 import Offers from '../app/components/offers/Offers'
 
 export default function Home() {

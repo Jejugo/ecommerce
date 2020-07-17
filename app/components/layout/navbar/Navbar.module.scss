@@ -6,6 +6,7 @@
   padding: 5px 0px;
   background-color: $yellow;
   top: 0;
+  color: $black;
 
   &__container{
     width: 80%;
@@ -43,6 +44,7 @@
         border: 0;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
         border: 0 rgba(0,0,0,.2);
+        outline: none;
       }
     }
 

@@ -1,0 +1,33 @@
+@import '../../assets/styles/main.scss';
+
+.userDropdown{
+  position: absolute;
+  width: 180px;
+  background-color: $lightGrey;
+  z-index: 2;
+  right: 100px;
+  top: 50px;
+
+  &__title{
+    text-align: center;
+    font-weight: 300;
+  }
+
+  &__list{
+    padding: 0;
+    margin: 0;
+    &_item{
+      list-style: none;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      height: auto;
+      padding: 15px;
+      font-weight: 300;
+
+      &:hover{
+        background-color: $grey;
+      }
+    }
+  }
+}

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import styles from "./SubNavbar.module.scss";
+import UserDropdown from "../../user-dropdown/UserDropdown";
 
 export default function SubNavbar() {
-  const [navbarItems] = useState([
+  const [ navbarItems ] = useState([
     { name: "Categorias", url: "http://teste.com.br" },
     { name: "Ofertas", url: "http://teste2.com.br" },
     { name: "Mais vendidos", url: "http://teste3.com.br" },
   ]);
+
+  const [ toggleUserDropdown, setToggleUserDropdown ] = useState(false)
 
   return (
     <section className={`${styles.navbar__container} ${styles.flex}`}>
@@ -23,9 +26,7 @@ export default function SubNavbar() {
       <div className={`${styles.navbar__authenticationItems} ${styles.flex}`}>
         <ul className={`${styles.navbar__authenticationItems_list} ${styles.flex}`}>
           <li className={styles.navbar__authenticationItems_list_item}>
-            <a>
-              <span class="material-icons">face</span>
-            </a>
+            <span class="material-icons" onClick={() => setToggleUserDropdown((prevToggleUserDropdown) => !prevToggleUserDropdown)}>face</span>
           </li>
           <li className={styles.navbar__authenticationItems_list_item}>
             <a>Teste</a>
@@ -35,6 +36,9 @@ export default function SubNavbar() {
           </li>
         </ul>
       </div>
+      {
+        toggleUserDropdown && <UserDropdown />
+      }
     </section>
   );
 }

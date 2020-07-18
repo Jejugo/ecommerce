@@ -1,11 +1,27 @@
+import react, { useContext } from 'react'
 import Head from 'next/head'
 import Layout from '../app/components/layout/Layout'
 import CarouselComponent from '../app/components/carousel/Carousel'
 import LastVisit from '../app/components/last-visit/LastVisit'
 import PageContainer from '../app/components/layout/main-container/PageContainer'
 import Offers from '../app/components/offers/Offers'
+import { AuthContext } from '../app/context/AuthProvider'
 
 export default function Home() {
+
+  const { user } = useContext(AuthContext)
+
+  const checkAuthUser = () => user ? (
+      <>
+        <LastVisit />
+        <Offers />
+      </>
+    ) : (
+      <>
+        <Offers />
+      </>
+    )
+
   return (
     <section className="container">
       <Head>
@@ -19,8 +35,7 @@ export default function Home() {
         <CarouselComponent />
   
         <PageContainer>
-          <LastVisit />
-          <Offers />
+          {checkAuthUser()}
         </PageContainer>
         
       </Layout>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Navbar.module.scss";
 import SubNavbar from "./SubNavbar";
+import { SubnavContext } from "../../../context/SubnavProvider";
 
 export default function Navbar() {
+
+  const { subnavToggle } = useContext(SubnavContext)
+  
   return (
     <nav className={styles.navbar}>
       <section className={styles.navbar__container}>
@@ -24,7 +28,7 @@ export default function Navbar() {
           </div>
         </ul>
       </section>
-      <SubNavbar />
+      { subnavToggle && <SubNavbar /> }
     </nav>
   );
 }

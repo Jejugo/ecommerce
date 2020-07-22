@@ -1,0 +1,23 @@
+@import '../../assets/styles/main.scss';
+
+.form{
+
+  &__input{
+    width: 70%;
+    margin: 3% auto;
+    padding: 5px;
+    font-size: $mediumFont;
+  }
+
+  &__submit{
+    width: 150px;
+    height: 40px;
+    background-color: $blue;
+    border-color: $blue;
+    border-radius: 5px;
+    border: none;
+    font-size: $mediumFont;
+    color: $white;
+    margin: 0 auto;
+  }
+}

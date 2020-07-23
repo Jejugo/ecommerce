@@ -59,7 +59,3 @@ class SignupComponent extends Component {
 }
 
 export default SignupComponent
-
-// stateItem.name == e.target.name
-// ? { ...stateItem, value: e.target.value }
-// : stateItem

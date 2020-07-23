@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import styles from './UserDropdown.module.scss'
 
 export default function UserDropdown() {
-
-  const [ userDropdownList ] = useState([
-    'Item1',
-    'Item2',
-    'Item3'
-  ])
+  const [userDropdownList] = useState(['Item1', 'Item2', 'Item3'])
 
   return (
     <div className={styles.userDropdown}>

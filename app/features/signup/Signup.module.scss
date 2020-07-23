@@ -1,0 +1,10 @@
+@import '../../assets/styles/main.scss';
+
+.signup{
+
+  &__title{
+    color: $black;
+    font-size: $mediumFont;
+    text-align: center;
+  }
+}

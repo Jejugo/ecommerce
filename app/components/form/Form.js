@@ -9,7 +9,7 @@ const Form = ({ formState, handleSubmit, handleInput }) => {
         onSubmit={handleSubmit}
       >
         <Card>
-          <div className={`${styles.flex} ${styles.column}`}>
+          <div className={`${styles.form__inputCard} ${styles.flex} ${styles.column}`}>
             {
               formState && formState.map(({ name, placeholder, value }) => (
                 <>

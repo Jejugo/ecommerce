@@ -46,7 +46,7 @@ export default function SubNavbar() {
       return (
         <>
           <li className={styles.navbar__authenticationItems_list_item}>
-            <a className={styles.navbar__authenticationItems_list_item_link}>
+            <a href="/signup" className={styles.navbar__authenticationItems_list_item_link}>
               Faça parte!
             </a>
           </li>

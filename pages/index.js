@@ -1,43 +1,15 @@
 import react, { useContext } from 'react'
-import Head from 'next/head'
 import Layout from '../app/components/layout/Layout'
-import CarouselComponent from '../app/components/carousel/Carousel'
-import LastVisit from '../app/components/last-visit/LastVisit'
-import PageContainer from '../app/components/layout/main-container/PageContainer'
-import Offers from '../app/components/offers/Offers'
-import { AuthContext } from '../app/context/AuthProvider'
+import HomeComponent from '../app/features/home/Home'
+import HeadComponent from '../app/components/head/HeadComponent'
 
-export default function Home() {
-
-  const { user } = useContext(AuthContext)
-
-  const checkAuthUser = () => user ? (
-      <>
-        <LastVisit />
-        <Offers />
-      </>
-    ) : (
-      <>
-        <Offers />
-      </>
-    )
-
+function Home() {
   return (
     <section className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"></link>
-      </Head>
+      <HeadComponent />
 
       <Layout>
-        <CarouselComponent />
-  
-        <PageContainer>
-          {checkAuthUser()}
-        </PageContainer>
-        
+        <HomeComponent></HomeComponent>
       </Layout>
 
       <style jsx global>{`
@@ -57,3 +29,5 @@ export default function Home() {
     </section>
   )
 }
+
+export default Home

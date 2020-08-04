@@ -4,8 +4,9 @@ import Layout from "../../app/components/layout/Layout";
 import SideNav from "../../app/components/side-navbar/SideNav";
 import DashContainer from "../../app/components/layout/dash-container/DashContainer";
 import PurchaseComponent from "../../app/features/purchase/PurchaseComponent";
+import ProtectRoute from "../../app/hoc/ProtectRoute";
 
-export default class Purchase extends Component {
+class Purchase extends Component {
   constructor() {
     super();
 
@@ -33,3 +34,5 @@ export default class Purchase extends Component {
     );
   }
 }
+
+export default ProtectRoute(Purchase)

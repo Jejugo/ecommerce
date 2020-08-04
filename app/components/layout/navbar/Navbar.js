@@ -2,10 +2,12 @@ import React, { useContext, useEffect } from "react";
 import styles from "./Navbar.module.scss";
 import SubNavbar from "./SubNavbar";
 import { SubnavContext } from "../../../context/SubnavProvider";
+import { AuthContext } from "../../../context/AuthProvider";
 
 export default function Navbar() {
 
   const { subnavToggle } = useContext(SubnavContext)
+  const { user } = useContext(AuthContext)
   
   return (
     <nav className={styles.navbar}>
@@ -24,6 +26,9 @@ export default function Navbar() {
           <div className={`${styles.navbar__list_items} ${styles.flex} ${styles.itemCenter} ${styles.flexEnd}`}>
             <li className={`${styles.navbar__list_items_item}`}>
               <span className={`material-icons ${styles.navbar__list_items_item_shoppingCart}`}>shopping_cart</span>
+            </li>
+            <li className={`${styles.navbar__list_items_item}`}>
+              <span> Bem vindo {user} </span>
             </li>
           </div>
         </ul>

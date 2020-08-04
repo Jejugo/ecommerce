@@ -21,7 +21,7 @@ class SignupComponent extends Component {
           placeholder: 'Insira seu cpf...',
         },
         { name: 'email', value: '', placeholder: 'Insira seu email...' },
-        { name: 'password', value: '', placeholder: 'Insira sua senha...' },
+        { name: 'password', value: '', placeholder: 'Insira sua senha...', type: 'password' },
       ],
       verifyEmail: false,
     }
@@ -49,8 +49,6 @@ class SignupComponent extends Component {
       },
       body: JSON.stringify(registerPayload),
     })
-
-    console.log(status)
 
     if (status === 200) {
       this.setState((previousState) => ({

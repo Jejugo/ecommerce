@@ -1,18 +1,19 @@
 import react, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function ProtectRoute(Component) {
   return () => {
     const { user, isAuthenticated, loading } = useContext(AuthContext);
-    console.log("isAuthenticated: ", isAuthenticated);
-    console.log("loading: ", loading);
     const router = useRouter();
-
+    console.log('--------', user, isAuthenticated)
     useEffect(() => {
-      if (!isAuthenticated && !loading) router.push("/login");
-    }, [loading, isAuthenticated]);
+      if (!isAuthenticated && !loading) router.push("/login") // do something
+      
+    }, [ loading, isAuthenticated ]);
 
-    return <Component {...arguments} />;
+    return (
+      isAuthenticated && <Component {...arguments} />
+    )
   };
 }

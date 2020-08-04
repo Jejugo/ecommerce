@@ -6,12 +6,8 @@ export default function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <main className={`${styles.layout}`}>
-        { children }
-      </main>
-      <footer>
-
-      </footer>
+      <main className={`${styles.layout}`}>{children}</main>
+      <footer></footer>
     </>
   )
 }

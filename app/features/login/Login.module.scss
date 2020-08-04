@@ -1,0 +1,12 @@
+@import '../../assets/styles/main.scss';
+
+.login{
+
+  &__title{
+    margin: 3% 0 0 0;
+    color: $black;
+    font-size: $mediumFont;
+    font-weight: normal;
+    text-align: center;
+  }
+}

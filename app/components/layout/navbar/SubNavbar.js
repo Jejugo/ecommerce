@@ -4,9 +4,9 @@ import UserDropdown from '../../user-dropdown/UserDropdown'
 import { AuthContext } from '../../../context/AuthProvider'
 
 export default function SubNavbar() {
-  const { user } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext)
 
-  const [navbarItems] = useState([
+  const [ navbarItems ] = useState([
     { name: 'Categorias', url: 'http://teste.com.br' },
     { name: 'Ofertas', url: 'http://teste2.com.br' },
     { name: 'Mais vendidos', url: 'http://teste3.com.br' },
@@ -14,9 +14,9 @@ export default function SubNavbar() {
 
   const [toggleUserDropdown, setToggleUserDropdown] = useState(false)
 
-  useEffect(() => {
-    console.log(`rodou: `, user)
-  }, [])
+  function logoutFn(){
+    logout()
+  }
 
   const checkAuthentication = () => {
     if (user) {
@@ -24,7 +24,7 @@ export default function SubNavbar() {
         <>
           <li className={styles.navbar__authenticationItems_list_item}>
             <span
-              class="material-icons"
+              className="material-icons"
               onClick={() =>
                 setToggleUserDropdown(
                   (prevToggleUserDropdown) => !prevToggleUserDropdown
@@ -35,10 +35,10 @@ export default function SubNavbar() {
             </span>
           </li>
           <li className={styles.navbar__authenticationItems_list_item}>
-            <a>Teste</a>
+            <a className={styles.navbar__authenticationItems_list_item_link}>Teste</a>
           </li>
           <li className={styles.navbar__authenticationItems_list_item}>
-            <a>Teste</a>
+            <a className={styles.navbar__authenticationItems_list_item_link} onClick={logoutFn}>Log out</a>
           </li>
         </>
       )
@@ -51,7 +51,7 @@ export default function SubNavbar() {
             </a>
           </li>
           <li className={styles.navbar__authenticationItems_list_item}>
-            <a className={styles.navbar__authenticationItems_list_item_link}>
+            <a href="/login" className={styles.navbar__authenticationItems_list_item_link}>
               Login
             </a>
           </li>
@@ -65,8 +65,8 @@ export default function SubNavbar() {
       <div className={styles.navbar__space}></div>
       <div className={styles.navbar__moreItems}>
         <ul className={`${styles.navbar__list} ${styles.flex}`}>
-          {navbarItems.map(({ name, url }) => (
-            <li className={`${styles.navbar__list_items}`}>
+          {navbarItems.map(({ name, url }, index) => (
+            <li className={`${styles.navbar__list_items}`} key={index}>
               <a className={`${styles.navbar__list_items_link}`} href={url}>
                 {name}
               </a>

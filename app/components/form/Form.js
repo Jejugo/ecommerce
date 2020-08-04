@@ -11,19 +11,19 @@ const Form = ({ formState, handleSubmit, handleInput }) => {
         <Card>
           <div className={`${styles.form__inputCard} ${styles.flex} ${styles.column}`}>
             {
-              formState && formState.map(({ name, placeholder, value }) => (
-                <>
+              formState && formState.map(({ name, placeholder, value, type }, index) => (
+                <div key={index}>
                   <label htmlFor={name} />
                   <input
                     className={styles.form__input}
                     onChange={handleInput}
                     id={name}
-                    type="text"
+                    type={type || "text"}
                     name={name}
                     placeholder={placeholder}
                     value={value}
                   />
-                </>
+                </div>
               ))
             }
           </div>

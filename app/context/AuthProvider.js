@@ -1,49 +1,82 @@
-import React, { createContext, useState, useEffect } from 'react'
-import Cookies from 'js-cookie'
+import React, { createContext, useContext, useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { ErrorContext } from './ErrorProvider'
 import axios from 'axios'
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext({})
 
 export default function AuthProvider({ children }) {
 
+  const router = useRouter()
+  const { setToggleError, setErrorMessage } = useContext(ErrorContext)
+
   const [ user, setUser ] = useState(null)
-  const [ loading, setLoading ] = useState(true)
+  const [ loading, setLoading ] = useState(false)
 
   useEffect(() => {
-    async function loadUserFromCookies() {
-      const token = Cookies.get('token')
+    async function loadUserFromSessionStorage() {
+      const token = sessionStorage.getItem('accessToken')
       if (token) {
-          console.log("Got a token in the cookies, let's see if it is valid")
-          const authorization = `Bearer ${token}`
-          const { data: user } = await axios.get('users/me')
-          if (user) setUser(user);
+        const { data: { customer: { name }} } = await axios.get(`http://localhost:3002/customer/token/${token}`)
+        if (name) setUser(name)
       }
       setLoading(false)
     }
 
-    loadUserFromCookies()
+    loadUserFromSessionStorage()
   })
 
+
   const login = async (email, password) => {
-    const { data: token } = await axios.post('auth/login', { email, password })
-    if (token) {
-        console.log("Got token")
-        Cookies.set('token', token, { expires: 60 })
-        const authorization = `Bearer ${token.token}`
-        const { data: user } = await axios.get('users/me')
-        setUser(user)
-        console.log("Got user", user)
+    if(email && password){
+      const registerPayload = {
+        username: email,
+        password
+      }
+      let sessionData = await fetch('http://localhost:3002/login', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registerPayload)
+      })
+  
+      sessionData = await sessionData.json() 
+
+      if(sessionData.accessToken){
+        const { accessToken, refreshToken, expiresIn } = sessionData
+        sessionStorage.setItem('accessToken', accessToken)
+        sessionStorage.setItem('refreshToken', refreshToken)
+        sessionStorage.setItem('expiresIn', expiresIn)
+        setUser(email)
+        if(!!user) router.push('/')
+      }
+  
+      else{
+        setToggleError(true)
+        setErrorMessage(sessionData.error.message)
+        setUser(null)
+      } 
+    }
+
+    else{
+      setToggleError(true)
+      setErrorMessage('Preencha todos os campos')
     }
   }
 
   const logout = (email, password) => {
-    Cookies.remove('token')
+    sessionStorage.removeItem('accessToken')
+    sessionStorage.removeItem('refreshToken')
+    sessionStorage.removeItem('expiresIn')
     setUser(null)
     window.location.pathname = '/login'
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, loading, logout}}>
+    <AuthContext.Provider
+      value={{ isAuthenticated: !!user, user, login, loading, logout }}
+    >
       {children}
     </AuthContext.Provider>
   )

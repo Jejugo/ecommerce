@@ -4,4 +4,6 @@
   width: calc(100vw - 300px);
   position: absolute;
   right: 0;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
 }

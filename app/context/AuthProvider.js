@@ -11,14 +11,18 @@ export default function AuthProvider({ children }) {
   const { setToggleError, setErrorMessage } = useContext(ErrorContext)
 
   const [ user, setUser ] = useState(null)
-  const [ loading, setLoading ] = useState(false)
+  //setName, setCPF, setCards, setAddresses
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
     async function loadUserFromSessionStorage() {
       const token = sessionStorage.getItem('accessToken')
       if (token) {
-        const { data: { customer: { name }} } = await axios.get(`http://localhost:3002/customer/token/${token}`)
+        const { data: { customer: { name } } } = await axios.get(`http://localhost:3002/customer/token/${token}`)
         if (name) setUser(name)
+      }
+      else {
+        setUser(null)
       }
       setLoading(false)
     }
@@ -49,7 +53,7 @@ export default function AuthProvider({ children }) {
         sessionStorage.setItem('refreshToken', refreshToken)
         sessionStorage.setItem('expiresIn', expiresIn)
         setUser(email)
-        if(!!user) router.push('/')
+        router.push('/')
       }
   
       else{

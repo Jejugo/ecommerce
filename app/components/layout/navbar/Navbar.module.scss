@@ -21,12 +21,17 @@
     &_leftSide{
       flex: 1;
 
+      &_item{
+        list-style: none;
+      }
+
       &_title{
         font-size: $bigFont;
         color: $black;
         font-weight: $heavyWeight;
         margin: 0 50px;
         list-style: none;
+        text-decoration: none;
       }
     }
 

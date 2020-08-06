@@ -6,9 +6,10 @@ export default function ProtectRoute(Component) {
   return () => {
     const { user, isAuthenticated, loading } = useContext(AuthContext);
     const router = useRouter();
-    console.log('--------', user, isAuthenticated)
     useEffect(() => {
-      if (!isAuthenticated && !loading) router.push("/login") // do something
+      if (!isAuthenticated && !loading){
+        router.push("/login")
+      }
       
     }, [ loading, isAuthenticated ]);
 

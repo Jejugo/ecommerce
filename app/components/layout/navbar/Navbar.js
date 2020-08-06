@@ -14,7 +14,7 @@ export default function Navbar() {
       <section className={styles.navbar__container}>
         <ul className={`${styles.navbar__list} ${styles.flex}`}>
           <div className={`${styles.navbar__list_leftSide} ${styles.flex} ${styles.itemCenter}`}>
-            <li className={`${styles.navbar__list_leftSide_title}`}><a href="http://localhost:3000">NOME_LOJA</a></li>
+            <li className={styles.navbar__list_leftSide_item}><a className={styles.navbar__list_leftSide_title} href="http://localhost:3000">Ecommerce</a></li>
           </div>
           <div className={styles.navbar__list_searchBar}>
             <input

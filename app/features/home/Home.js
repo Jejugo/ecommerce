@@ -24,7 +24,6 @@ function HomeComponent() {
   return (
     <>
       <CarouselComponent />
-
       <PageContainer>{checkAuthUser()}</PageContainer>
     </>
   )

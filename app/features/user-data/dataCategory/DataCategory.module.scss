@@ -1,0 +1,46 @@
+@import '../../../assets/styles/main.scss';
+
+.dataCategory{
+
+  &__card{
+    color: $black;
+    font-size: $mediumFont;
+    font-weight: 300;
+  }
+
+  &__list{
+    list-style: none;
+    padding: 0;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,.07), 0 1px 2px 0 rgba(0,0,0,.25);
+
+    &_row{
+      display: flex;
+
+      &_item{
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        font-size: 16px;
+        padding: 13px 18px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+
+        &_text{
+          font-size: $mediumFont;
+          margin: 5px 0;
+        }
+      }
+
+      &_name{
+        flex: 1;
+      }
+
+      &_value{
+        flex: 2;
+      }
+    }
+  }
+}

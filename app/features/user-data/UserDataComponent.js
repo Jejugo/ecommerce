@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './UserDataComponent.module.scss'
-import DataCategory from './dataCategory/DataCategory'
+import DataCategory from './data-category/DataCategory'
 
 export default class UserDataComponent extends Component {
   constructor(props) {
@@ -10,8 +10,7 @@ export default class UserDataComponent extends Component {
       accountData: {
         title: 'Dados da conta',
         data: [
-          { name: 'Usuário', value: '' },
-          { name: 'E-mail', value: '' },
+          { name: 'Usuário', value: '' }
         ],
       },
       personalData: {

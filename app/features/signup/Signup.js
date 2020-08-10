@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import styles from './Signup.module.scss'
 import Form from '../../components/form/Form'
 import Card from '../../components/card/Card'
+import { ErrorProvider, ErrorContext } from '../../context/ErrorProvider'
 
-class SignupComponent extends Component {
+class SignupForm extends Component {
   constructor(props) {
     super(props)
 
@@ -32,30 +33,36 @@ class SignupComponent extends Component {
 
   async handleSubmit(e) {
     e.preventDefault()
-    const { inputList } = this.state
-    const [name, lastName, securityNumber, email, password] = inputList
-
-    const registerPayload = {
-      name: `${name.value} ${lastName.value}`,
-      securityNumber: securityNumber.value,
-      email: email.value,
-      password: password.value,
-    }
-
-    const { status } = await fetch('http://localhost:3002/register', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registerPayload),
-    })
-
-    if (status === 200) {
-      this.setState((previousState) => ({
-        ...previousState,
-        verifyEmail: true,
-      }))
-    }
+      const { inputList } = this.state
+      const [name, lastName, securityNumber, email, password] = inputList
+  
+      const registerPayload = {
+        name: `${name.value} ${lastName.value}`,
+        securityNumber: securityNumber.value,
+        email: email.value,
+        password: password.value,
+      }
+  
+      let data = await fetch('http://localhost:3002/register', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registerPayload),
+      })
+      data = await data.json()
+      if (data.status === 200) {
+        this.setState((previousState) => ({
+          ...previousState,
+          verifyEmail: true,
+        }))
+      }
+      else{
+        const { ErrorContextData } = this.props
+        const { setErrorMessage, setToggleError } = ErrorContextData
+        setErrorMessage(data.error)
+        setToggleError(true)
+      }
   }
 
   handleInput(e) {
@@ -121,4 +128,8 @@ class SignupComponent extends Component {
   }
 }
 
-export default SignupComponent
+export default function SignupComponent(){
+  const ErrorContextData = useContext(ErrorContext)
+
+  return <SignupForm ErrorContextData={ErrorContextData}></SignupForm>
+}

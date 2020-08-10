@@ -11,7 +11,6 @@ class userDataConfiguration extends Component {
         title: 'Dados pessoais',
         formData: [
           { name: 'completeName', value: '', placeholder: 'Mude seu nome...' },
-          { name: 'completeName', value: '', placeholder: 'Mude seu nome...' },
         ]
       },
 

@@ -9,17 +9,17 @@ export default function UserDropdown() {
 
   return (
     <div className={styles.userDropdown}>
-      <h1 className={styles.userDropdown__title}> Olá { user } </h1>
+      <h1 className={styles.userDropdown__title}> Olá { user.name } </h1>
       <hr />
       <ul className={styles.userDropdown__list}>
         <li className={styles.userDropdown__list_item}>
-          <a href="/dashboard/purchase">Compras</a>
+          <a className={styles.userDropdown__list_item_link} href="/dashboard/purchase">Compras</a>
         </li>
         <li className={styles.userDropdown__list_item}>
-          <a>Item2</a>
+          <a className={styles.userDropdown__list_item_link}>Item2</a>
         </li>
         <li className={styles.userDropdown__list_item}>
-          <a>Item3</a>
+          <a className={styles.userDropdown__list_item_link}>Item3</a>
         </li>
       </ul>
     </div>

@@ -11,24 +11,47 @@ export default function AuthProvider({ children }) {
   const { setToggleError, setErrorMessage } = useContext(ErrorContext)
 
   const [ user, setUser ] = useState(null)
-  //setName, setCPF, setCards, setAddresses
   const [ loading, setLoading ] = useState(true)
+
+  const loadUserDataToCache = customer => {
+    console.log('CUSTOMER!!: ', customer)
+    if (customer){
+      setUser(customer)
+    } 
+  }
 
   useEffect(() => {
     async function loadUserFromSessionStorage() {
       const token = sessionStorage.getItem('accessToken')
+      console.log('getting accessToken: ', token)
       if (token) {
-        const { data: { customer: { name } } } = await axios.get(`http://localhost:3002/customer/token/${token}`)
-        if (name) setUser(name)
+        await axios.get(`http://localhost:3002/customer/token/${token}`)
+          .then(res => loadUserDataToCache(res.data.customer))
+          .catch(async err => {
+            try{
+              console.log('getting refreshToken')
+              const token = sessionStorage.getItem('refreshToken')
+              const { data: { accessToken } } = await axios.post(`http://localhost:3002/refresh/token`, {
+                token
+              })
+      
+              const { data: { customer } } = await axios.get(`http://localhost:3002/customer/token/${accessToken}`)
+              loadUserDataToCache(customer)
+            }
+
+            catch(err){
+              console.log(err)
+            }
+        })
       }
       else {
         setUser(null)
       }
+      
       setLoading(false)
     }
-
     loadUserFromSessionStorage()
-  })
+  }, [ ])
 
 
   const login = async (email, password) => {
@@ -79,7 +102,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, login, loading, logout }}
+      value={{ isAuthenticated: !!user, user, loading, login, logout }}
     >
       {children}
     </AuthContext.Provider>

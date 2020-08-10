@@ -8,6 +8,8 @@ export default function Navbar() {
 
   const { subnavToggle } = useContext(SubnavContext)
   const { user } = useContext(AuthContext)
+
+  console.log(user)
   
   return (
     <nav className={styles.navbar}>
@@ -28,7 +30,7 @@ export default function Navbar() {
               <span className={`material-icons ${styles.navbar__list_items_item_shoppingCart}`}>shopping_cart</span>
             </li>
             <li className={`${styles.navbar__list_items_item}`}>
-              <span> Bem vindo {user} </span>
+              <span> { user && `Bem vindo ${user.name}`}  </span>
             </li>
           </div>
         </ul>

@@ -5,8 +5,15 @@
   width: 180px;
   background-color: $lightGrey;
   z-index: 2;
-  right: 100px;
+  right: 190px;
   top: 50px;
+  color: $black;
+
+  // &:after{
+  //   width: 40px;
+  //   height: 40px;
+  //   background: $lightGrey;
+  // }
 
   &__title{
     text-align: center;
@@ -24,6 +31,11 @@
       height: auto;
       padding: 15px;
       font-weight: 300;
+      
+      &_link{
+        text-decoration: none;
+        color: $black;
+      }
 
       &:hover{
         background-color: $grey;

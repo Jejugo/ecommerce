@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 export default function ProtectRoute(Component) {
   return () => {
-    const { user, isAuthenticated, loading } = useContext(AuthContext);
+    const { user, isAuthenticated, loading } = useContext(AuthContext)
     const router = useRouter();
     useEffect(() => {
       if (!isAuthenticated && !loading){

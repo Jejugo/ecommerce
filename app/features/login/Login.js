@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { useRouter } from "next/router";
 import Form from '../../components/form/Form'
 import styles from './Login.module.scss'
 import { AuthContext } from '../../context/AuthProvider';

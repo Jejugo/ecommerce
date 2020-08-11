@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Head from 'next/head'
 import Layout from "../../../app/components/layout/Layout";
 import SideNav from "../../../app/components/side-navbar/SideNav";
 import DashContainer from "../../../app/components/layout/dash-container/DashContainer";
 import ProtectRoute from "../../../app/hoc/ProtectRoute";
 import UserDataComponent from "../../../app/features/user-data/UserDataComponent";
+import HeadComponent from '../../../app/components/head/HeadComponent';
+import Error from "../../../app/components/error/Error";
 
 class Purchase extends Component {
   constructor() {
@@ -16,14 +17,8 @@ class Purchase extends Component {
   render() {
     return (
       <section>
-        <Head>
-          <title>Create Next App</title>
-          <link rel="icon" href="/favicon.ico" />
-          <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-          ></link>
-        </Head>
+        <Error></Error>
+        <HeadComponent></HeadComponent>
         <Layout>
           <SideNav selected={"configuration"}/>
           <DashContainer>

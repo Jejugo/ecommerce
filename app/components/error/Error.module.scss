@@ -5,7 +5,7 @@
   padding: 25px;
   border-radius: 10px;
   bottom: 5%;
-  right: -500px;
+  right: -700px;
   background-color: $red;
   border: 1px solid #ccc;
   transition: 0.5s ease;
@@ -19,6 +19,7 @@
     border: 1px solid #ccc;
     right: 10%;
     transition: 0.5s ease;
+    z-index: 1;
   }
 
   &__message{

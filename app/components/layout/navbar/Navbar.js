@@ -8,8 +8,6 @@ export default function Navbar() {
 
   const { subnavToggle } = useContext(SubnavContext)
   const { user } = useContext(AuthContext)
-
-  console.log(user)
   
   return (
     <nav className={styles.navbar}>

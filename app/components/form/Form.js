@@ -22,6 +22,7 @@ const Form = ({ formState, handleSubmit, handleInput }) => {
                     name={name}
                     placeholder={placeholder}
                     value={value}
+                    onFocus={(e) => e.target.name}
                   />
                 </div>
               ))

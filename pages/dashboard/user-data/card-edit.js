@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import Head from 'next/head'
 import Layout from "../../../app/components/layout/Layout";
 import SideNav from "../../../app/components/side-navbar/SideNav";
 import DashContainer from "../../../app/components/layout/dash-container/DashContainer";
 import ProtectRoute from "../../../app/hoc/ProtectRoute";
 import HeadComponent from "../../../app/components/head/HeadComponent";
-import UserDataConfiguration from "../../../app/features/user-data/user-data-configuration/UserDataConfiguration";
+import UserCardData from "../../../app/features/user-data/user-card-data/UserCardData";
 
-class Purchase extends Component {
+class UserCard extends Component {
   constructor() {
     super();
 
@@ -21,7 +20,7 @@ class Purchase extends Component {
         <Layout>
           <SideNav selected={"configuration"}/>
           <DashContainer>
-            <UserDataConfiguration></UserDataConfiguration>
+            <UserCardData></UserCardData>
           </DashContainer>
         </Layout>
       </section>
@@ -29,4 +28,4 @@ class Purchase extends Component {
   }
 }
 
-export default ProtectRoute(Purchase)
+export default ProtectRoute(UserCard)

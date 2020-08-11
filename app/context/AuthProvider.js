@@ -14,7 +14,6 @@ export default function AuthProvider({ children }) {
   const [ loading, setLoading ] = useState(true)
 
   const loadUserDataToCache = customer => {
-    console.log('CUSTOMER!!: ', customer)
     if (customer){
       setUser(customer)
     } 
@@ -34,7 +33,9 @@ export default function AuthProvider({ children }) {
               const { data: { accessToken } } = await axios.post(`http://localhost:3002/refresh/token`, {
                 token
               })
-      
+
+              sessionStorage.setItem('accessToken', accessToken)
+    
               const { data: { customer } } = await axios.get(`http://localhost:3002/customer/token/${accessToken}`)
               loadUserDataToCache(customer)
             }

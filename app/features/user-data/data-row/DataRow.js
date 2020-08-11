@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './DataRow.module.scss'
+import { warningContext } from '../UserDataComponent' 
+import Button from '../../../components/button/Button'
 
-export default function DataRow({ userData }) {
+export default function DataRow({ userData, changeData }) {
+
+  const { setWarningMessage, setToggleWarning } = useContext(warningContext)
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    e.persist()
+    changeData(prevState => (prevState.map(item => {
+      if(item.name === e.target.name){ 
+        return {
+          ...item,
+          value: e.target.value
+        }
+      }
+      return item
+    })))
+    setToggleWarning(true)
+    setWarningMessage('Lembre-se de salvar seus dados antes de sair!')
+  }
+
   return (
     <ul className={styles.dataCategory__list}>
-      {userData.map((item) => (
-        <div className={styles.dataCategory__list_row}>
+      {userData.map((item, index) => (
+        <div className={styles.dataCategory__list_row} key={index}>
           <div
             className={`${styles.dataCategory__list_rowLeft} ${styles.flex}`}
           >
@@ -19,23 +40,19 @@ export default function DataRow({ userData }) {
             <li
               className={`${styles.dataCategory__list_row_item} ${styles.dataCategory__list_row_value}`}
             >
-              <input
-                className={styles.dataCategory__list_row_item_value}
-                type="text"
-                value={item.value}
-                disabled={!item.value}
-              ></input>
-            </li>
-          </div>
-          <div
-            className={`${styles.dataCategory__list_rowRight} ${styles.flex}`}
-          >
-            <li
-              className={`${styles.dataCategory__list_row_item} ${styles.dataCategory__list_row_symbol}`}
-            >
-              <button className={styles.dataCategory__list_row_item_button}>
-                Editar
-              </button>
+              {
+                item.status !== 'empty' ? ( 
+                  <input
+                  className={styles.dataCategory__list_row_item_value}
+                  type="text"
+                  name={item.name}
+                  value={item.value || ''}
+                  onChange={handleChange}
+                ></input>
+                ) : (
+                  <Button text={'Editar'} link={'/dashboard/user-data/card-edit'}></Button>
+                )
+              }
             </li>
           </div>
         </div>

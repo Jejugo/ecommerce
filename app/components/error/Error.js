@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styles from './Error.module.scss'
 import { ErrorContext } from '../../context/ErrorProvider'
 
@@ -9,6 +9,11 @@ export default function Error() {
   const closeError = () => {
     setToggleError(false)
   }
+
+  useEffect(() => {
+    console.log('mudou')
+    console.log(errorMessage)
+  }, toggleError)
   
   return (
     <div className={!toggleError ? styles.error : styles.error__show}>

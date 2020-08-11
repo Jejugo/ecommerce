@@ -7,4 +7,10 @@
     font-size: $mediumFont;
     font-weight: 300;
   }
+
+  &__buttonWrapper {
+    margin: 20px 0 0 0;
+    width: 100%;
+    text-align: center;
+  }
 }

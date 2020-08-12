@@ -2,11 +2,34 @@
 
 .userData{
   width: 70%;
-  margin: 2% auto;
+  margin: 10vh auto;
 
   &__title{
     color: $black;
     font-size: $bigFont;
     font-weight: 300;
+  }
+}
+
+.warning{
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  width: calc(100% - 300px);
+  margin: 0;
+  height: 50px;
+  background-color: $red;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+
+  &__success{
+    background-color: $green;
+  }
+
+  &__text{
+    margin: 0;
+    text-align: center;
+    font-size: $smallFont;
   }
 }

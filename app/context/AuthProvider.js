@@ -76,7 +76,8 @@ export default function AuthProvider({ children }) {
         sessionStorage.setItem('accessToken', accessToken)
         sessionStorage.setItem('refreshToken', refreshToken)
         sessionStorage.setItem('expiresIn', expiresIn)
-        setUser(email)
+        const { data: { customer } } = await axios.get(`http://localhost:3002/customer/token/${accessToken}`)
+        loadUserDataToCache(customer)
         router.push('/')
       }
   

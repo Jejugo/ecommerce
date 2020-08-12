@@ -11,7 +11,7 @@ export default function DataRow({ userData, changeData }) {
     e.preventDefault()
     e.persist()
     changeData(prevState => (prevState.map(item => {
-      if(item.name === e.target.name){ 
+      if(item.title === e.target.name){ 
         return {
           ...item,
           value: e.target.value
@@ -20,7 +20,7 @@ export default function DataRow({ userData, changeData }) {
       return item
     })))
     setToggleWarning(true)
-    setWarningMessage('Lembre-se de salvar seus dados antes de sair!')
+    setWarningMessage({ message: 'Lembre-se de salvar seus dados antes de sair!', success: false })
   }
 
   return (
@@ -34,7 +34,7 @@ export default function DataRow({ userData, changeData }) {
               className={`${styles.dataCategory__list_row_item} ${styles.dataCategory__list_row_name}`}
             >
               <p className={styles.dataCategory__list_row_item_text}>
-                {item.name}
+                {item.title}
               </p>
             </li>
             <li
@@ -45,9 +45,10 @@ export default function DataRow({ userData, changeData }) {
                   <input
                   className={styles.dataCategory__list_row_item_value}
                   type="text"
-                  name={item.name}
+                  name={item.title}
                   value={item.value || ''}
                   onChange={handleChange}
+                  disabled={item.disabled || false}
                 ></input>
                 ) : (
                   <Button text={'Editar'} link={'/dashboard/user-data/card-edit'}></Button>

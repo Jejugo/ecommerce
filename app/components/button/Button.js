@@ -10,7 +10,7 @@ export default function Button({ text, link=null}) {
   }
 
   return (
-    <div onClick={redirect}>
+    <div onClick={link ? redirect : null}>
       <button className={styles.button}> { text } </button>
     </div>
   )

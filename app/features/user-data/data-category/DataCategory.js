@@ -2,54 +2,58 @@ import React, { useState, useEffect, useContext } from 'react'
 import styles from './DataCategory.module.scss'
 import DataRow from '../data-row/DataRow'
 import { ErrorContext } from '../../../context/ErrorProvider'
+import { warningContext } from '../UserDataComponent' 
 import Button from '../../../components/button/Button'
+import builder from '../../../builder'
 
 export default function DataCategory({ user }) {
   const { setToggleError, setErrorMessage } = useContext(ErrorContext)
+  const { setToggleWarning, setWarningMessage } = useContext(warningContext)
 
   const [userData, setUserData] = useState([
-    { name: 'E-mail', value: user.email },
+    { name: 'email', title: 'E-mail', value: user.email },
   ])
 
   const [personalData, setPersonalData] = useState([
-    { name: 'Nome', value: user.name },
-    { name: 'CPF', value: user.securityNumber },
-    { name: 'E-mail', value: user.email },
+    { name: 'name', title: 'Nome', value: user.name },
+    { name: 'securityNumber', title: 'CPF', value: user.securityNumber, disabled: true },
+    { name: 'email', title: 'E-mail', value: user.email},
   ])
-
-  const [bankCardData, setBankCardData] = useState(
-    user.bankCards.map((card) => ({
-      name: card.flag,
-      value: {
-        number: card.number,
-        expiration: card.expiration,
-        cvv: card.cvv,
-      },
-    }))
-  )
 
   const [addressData, setAddressData] = useState([
-    { name: 'Rua', value: user.address.street },
-    { name: 'Bairro', value: user.address.neighborhood },
-    { name: 'Número', value: user.address.number },
-    { name: 'CEP', value: user.address.zipcode },
-    { name: 'Complemento', value: user.address.complement },
+    { name: 'street', title: 'Rua', value: user.address.street },
+    { name: 'neighborhood', title: 'Bairro', value: user.address.neighborhood },
+    { name: 'number', title: 'Número', value: user.address.number },
+    { name: 'zipcode', title: 'CEP', value: user.address.zipcode },
+    { name: 'complement', title: 'Complemento', value: user.address.complement },
   ])
 
-  useEffect(() => {
-    if (bankCardData.length === 0) {
-      setErrorMessage('Não há cartões. Adicione um para realizar suas compras!')
-      setToggleError(true)
-      setBankCardData([
-        { status: 'empty', name: 'Não há cartões adicionados.' },
-      ])
-    }
-  }, [bankCardData])
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    console.log(userData, personalData, bankCardData, addressData)
+    console.log(personalData, addressData)
+    const newCustomer = builder.customer.newCustomerFromUserDataForm(personalData, addressData)
+    try {
+      await fetch(`http://localhost:3002/customer/${user.id}`, {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCustomer),
+      })
+      setToggleWarning(true)
+      setWarningMessage({ message: 'Dados salvos com sucesso!', success: true })
+    }
+    catch(err){
+      console.error(err)
+      setErrorMessage('Houve um erro no envio dos dados.')
+      setToggleError(true)
+    }
+
   }
+
+  useEffect(() => {
+
+  }, [ personalData, addressData ])
 
   return (
     <section className={styles.dataCategory}>
@@ -58,8 +62,6 @@ export default function DataCategory({ user }) {
         <DataRow userData={userData} changeData={setUserData}></DataRow>
         <h2 className={styles.dataCategory__card}> Dados Pessoais</h2>
         <DataRow userData={personalData} changeData={setPersonalData}></DataRow>
-        <h2 className={styles.dataCategory__card}> Dados de Cartão </h2>
-        <DataRow userData={bankCardData} changeData={setBankCardData}></DataRow>
         <h2 className={styles.dataCategory__card}> Endereço </h2>
         <DataRow userData={addressData} changeData={setAddressData}></DataRow>
         <div className={styles.dataCategory__buttonWrapper}>

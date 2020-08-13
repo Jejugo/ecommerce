@@ -2,23 +2,47 @@
 
 .lastVisitItems{
 
-  &__list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  &__list{
     justify-content: space-between;
     flex-wrap: nowrap;
+    overflow-x: hidden;
     overflow-y: scroll;
+    height: 100%;
 
-    &::-webkit-scrollbar {
-      display: none;
+    &:before{
+      content: '';
+      right: 220px;
+      height: 270px;
+      position: absolute;
+      width: 150px;
+      z-index: 100;
+      background: linear-gradient(90deg, rgb(242, 243, 248, 0) 0%, #f7f7f7 100% );
+      pointer-events: none;
     }
 
-    &_item{
-      list-style: none;
-      border: 1px solid #ccc;
-      min-width: 150px;
-      min-height: 100px;
-      margin-right: 20px;
-      color: $black;
+  }
+
+  &__btn{
+    min-width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    background: $white;
+    border: 0px;
+    outline: none;
+    cursor: pointer;
+    z-index: 200;
+    margin: 10px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, .08);
+    transition: all .25 ease;
+    font-size: 1.6rem;
+
+    &:hover{
+      transform: translate(0, -10px);
+      box-shadow: 0px 17px 35px rgba(0, 0, 0, .07);
     }
   }
 }

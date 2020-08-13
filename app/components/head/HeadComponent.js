@@ -10,6 +10,10 @@ export default function HeadComponent() {
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet"
       ></link>
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+      ></link>
     </Head>
   )
 }

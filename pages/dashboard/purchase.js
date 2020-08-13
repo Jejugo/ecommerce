@@ -5,6 +5,7 @@ import SideNav from "../../app/components/side-navbar/SideNav";
 import DashContainer from "../../app/components/layout/dash-container/DashContainer";
 import PurchaseComponent from "../../app/features/purchase/PurchaseComponent";
 import ProtectRoute from "../../app/hoc/ProtectRoute";
+import HeadComponent from '../../app/components/head/HeadComponent';
 
 class Purchase extends Component {
   constructor() {
@@ -16,14 +17,7 @@ class Purchase extends Component {
   render() {
     return (
       <section>
-        <Head>
-          <title>Create Next App</title>
-          <link rel="icon" href="/favicon.ico" />
-          <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-          ></link>
-        </Head>
+        <HeadComponent></HeadComponent>
         <Layout>
           <SideNav selected={"purchase"}/>
           <DashContainer>

@@ -10,11 +10,6 @@ export default function Error() {
     setToggleError(false)
   }
 
-  useEffect(() => {
-    console.log('mudou')
-    console.log(errorMessage)
-  }, toggleError)
-  
   return (
     <div className={!toggleError ? styles.error : styles.error__show}>
       <p className={styles.error__message} onClick={closeError}> { errorMessage } </p>

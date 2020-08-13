@@ -1,0 +1,55 @@
+@import '../../../assets/styles/main.scss';
+
+.listCard{
+  list-style: none;
+  border: 1px solid #ccc;
+  min-width: 225px;
+  min-height: 225px;
+  max-width: 225px;
+  max-height: 225px;
+  margin-top: 15px;
+  margin-right: 20px;
+  background-color: $white;
+  border-radius: 25px;
+  color: $black;
+  z-index: 10;
+  position: relative;
+  transition: all .25s ease;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, .08);
+  cursor: pointer;
+
+  &__image{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    &_item{
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &_title{
+      margin-bottom: 0;
+      padding: 15px 0 0 0px;
+    }
+
+    &_text{
+      margin: 0;
+    }
+  }
+
+  &:hover{
+    transform: translate(0, -10px);
+    box-shadow: 0 17px 25px rgba(0, 0, 0, .07);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+}

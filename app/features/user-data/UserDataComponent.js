@@ -12,11 +12,6 @@ export default function UserDataComponent(props) {
 
   const { user } = useContext(AuthContext)
 
-  useEffect(() => {
-    console.log('mudou')
-    console.log(messageWarning)
-  }, [ messageWarning ])
-
   return (
     <warningContext.Provider value={{ setWarningMessage, setToggleWarning }}>
       { messageWarning.message && <div className={!messageWarning.success ? `${styles.warning}` : `${styles.warning} ${styles.warning__success}`}><p className={styles.warning__text}> { messageWarning.message } </p></div> }

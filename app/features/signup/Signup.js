@@ -51,7 +51,7 @@ class SignupForm extends Component {
         body: JSON.stringify(registerPayload),
       })
       data = await data.json()
-      if (data.status === 200) {
+      if (data.message === 'Data saved successfully.') {
         this.setState((previousState) => ({
           ...previousState,
           verifyEmail: true,

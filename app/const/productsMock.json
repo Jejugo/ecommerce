@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": 12342,
+      "title": "Calça",
+      "description": "Uma ótima calça que vai servir muito bem em qualquer pessoa!!",
+      "price": 25.0
+    },
+    {
+      "id": 2345345,
+      "title": "Camiseta",
+      "description": "Camiseta tranquilex para voce e sua familia",
+      "price": 32.0
+    },
+    {
+      "id": 34564,
+      "title": "Sapato",
+      "description": "Sapato confortável com grande elasticidade",
+      "price": 200.0
+    },
+    {
+      "id": 46788,
+      "title": "Jeans",
+      "description": "Jeans repleto de amor",
+      "price": 50.0
+    },
+    {
+      "id": 525252,
+      "title": "Gravata",
+      "description": "Aquela gravata que voce admira!",
+      "price": 75.0
+    },
+    {
+      "id": 12342,
+      "title": "Calça",
+      "description": "Uma ótima calça que vai servir muito bem em qualquer pessoa!!",
+      "price": 25.0
+    },
+    {
+      "id": 2345345,
+      "title": "Camiseta",
+      "description": "Camiseta tranquilex para voce e sua familia",
+      "price": 32.0
+    },
+    {
+      "id": 34564,
+      "title": "Sapato",
+      "description": "Sapato confortável com grande elasticidade",
+      "price": 200.0
+    },
+    {
+      "id": 46788,
+      "title": "Jeans",
+      "description": "Jeans repleto de amor",
+      "price": 50.0
+    },
+    {
+      "id": 525252,
+      "title": "Gravata",
+      "description": "Aquela gravata que voce admira!",
+      "price": 75.0
+    }
+  ]
+}

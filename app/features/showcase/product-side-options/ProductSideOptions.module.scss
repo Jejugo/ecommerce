@@ -1,0 +1,73 @@
+@import '../../../assets/styles/main.scss';
+
+.sideOptions{
+  flex-direction: column;
+  flex-basis: 100%;
+  margin-bottom: 10%;
+
+  &__title{
+    width: 100%;
+    text-align: center;
+  }
+
+  &__price{
+
+    
+
+    &_text{
+      font-size: $bigFont;
+      text-align: center;
+    }
+
+    &_quantity{
+      justify-content: center;
+      align-items: center;
+      height: 49px;
+      position: relative;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      font-weight: 700;
+      border: 1px solid #dfdfdf;
+      background-color: $white;
+
+
+      &_input{
+        height: 100%;
+        border: none;
+        outline: none;
+        width: 50px;
+        font-size: $mediumFont;
+        text-align: center;
+      }
+
+      &_control{
+        height: 100%;
+        width: 50px;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.line{
+  width: 100%;
+  margin: 5% auto;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2)
+  );
+}

@@ -1,0 +1,43 @@
+@import '../../assets/styles/main.scss';
+
+.productShowcase{
+  &__pictures{
+    flex: 1;
+    flex-direction: column;
+    &_item{
+      border: 1px solid #ccc;
+      margin-bottom: 20%;
+      max-width: 100px;
+      max-height: 100px;
+      cursor: pointer;
+    }
+  }
+
+  &__purchaseButton{
+    width: 200px;
+  }
+
+  &__bigImage{
+    flex: 3;
+    width: 80%;
+    overflow: hidden;
+  
+    &_item{
+      width: 500px;
+      height: 500px;
+      cursor: -moz-zoom-in; 
+      cursor: -webkit-zoom-in; 
+      cursor: zoom-in;
+      transition: transform .2s;
+
+      &:hover{
+        transform: scale(1.4)
+      }
+    }
+  }
+
+  &__options{
+    flex: 2;
+    justify-content: center;
+  }
+}

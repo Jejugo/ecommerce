@@ -1,21 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styles from './LastVisit.module.scss'
 import ListSlider from '../list-slider/ListSlider'
+import { retrieveProducts } from '../../services/products'
+import { ProductsContext } from '../../context/ProductsProvider'
 
 export default function LastVisit() {
 
-  const [ products ] = useState([
-    {name: 'Calça'},
-    {name: 'Camiseta'},
-    {name: 'Sapato'},
-    {name: 'Jeans'},
-    {name: 'Gravata'},
-    {name: 'Calça'},
-    {name: 'Camiseta'},
-    {name: 'Sapato'},
-    {name: 'Jeans'},
-    {name: 'Gravata'},
-  ])
+  const { products } = useContext(ProductsContext)
 
   return (
     <section className={styles.lastVisit}>

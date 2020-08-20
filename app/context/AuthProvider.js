@@ -83,7 +83,7 @@ export default function AuthProvider({ children }) {
   
       else{
         setToggleError(true)
-        setErrorMessage(sessionData.error.message)
+        setErrorMessage(sessionData.error.message || sessionData.error)
         setUser(null)
       } 
     }

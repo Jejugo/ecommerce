@@ -1,24 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import ListSlider from '../list-slider/ListSlider'
 import styles from './Offers.module.scss'
+import { ProductsContext } from '../../context/ProductsProvider'
 
 export default function Offers() {
 
-  const [ offers ] = useState([
-    {name: 'Offer1'},
-    {name: 'Offer2'},
-    {name: 'Offer3'},
-    {name: 'Offer4'},
-    {name: 'Offer5'},
-    {name: 'Offer6'},
-    {name: 'Offer7'},
-    {name: 'Offer8'},
-  ])
+  const { products } = useContext(ProductsContext)
+
 
   return (
     <section className={styles.offers}>
       <h1 className={styles.offers__title}> Ofertas </h1>
-      <ListSlider items={offers}/>
+      <ListSlider items={products}/>
     </section>
   )
 }

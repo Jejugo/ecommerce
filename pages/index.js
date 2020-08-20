@@ -1,9 +1,19 @@
-import react, { useContext } from 'react'
+import react, { useContext, useEffect } from 'react'
 import Layout from '../app/components/layout/Layout'
 import HomeComponent from '../app/features/home/Home'
 import HeadComponent from '../app/components/head/HeadComponent'
+import { retrieveProducts } from '../app/services/products'
+import { ProductsContext } from '../app/context/ProductsProvider'
 
-function Home() {
+function Home(props) {
+
+  const { products, setProducts} = useContext(ProductsContext)
+
+  useEffect(() => {
+    setProducts(props.products)
+
+  }, [])
+
   return (
     <section className="container">
       <HeadComponent />
@@ -28,6 +38,17 @@ function Home() {
       `}</style>
     </section>
   )
+}
+
+export async function getStaticProps() {
+  const { products } = await retrieveProducts()
+  // The value of the `props` key will be
+  //  passed to the `Home` component
+  return {
+    props: {
+      products: products.data
+    }
+  }
 }
 
 export default Home

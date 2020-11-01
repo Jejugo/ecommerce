@@ -33,6 +33,17 @@ export default function PaymentCheckoutForm({ success, product }) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
       return
+    } 
+
+    const billingDetails = {
+      name: user.name,
+      email: user.email,
+      address: {
+        city: 'Vinhedo',
+        line1: `${user.address.number} ${user.address.street}`,
+        state: user.address.state,
+        postal_code: user.address.zipcode
+      }
     }
 
     const cardElement = elements.getElement("card");
@@ -40,6 +51,7 @@ export default function PaymentCheckoutForm({ success, product }) {
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
+      billing_details: billingDetails
     })
 
 
@@ -52,33 +64,24 @@ export default function PaymentCheckoutForm({ success, product }) {
 
     else {
       try {
-        console.log(user)
-        const purchase = {
-          ...paymentMethod,
-          address: {
-            line1: `${user.address.number} ${user.address.street}`,
-            postal_code: user.address.zipcode,
-            city: user.address.city,
-            state: user.address.state,
-            country: 'Brazil'
-          },
-          customer: {
-            email: user.email,
-            name: user.name,
-          },
-          product,
-          quantity,
-        }
-
-        let data = await fetch('http://localhost:3002/checkout', {
+        const data = await fetch('http://localhost:3002/checkout', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(purchase),
+          body: JSON.stringify({
+            amount: quantity,
+          })
         })
 
-        console.log('response: ', data)
+        const { paymentIntent: { client_secret: clientSecret } }= await data.json()
+
+        const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: paymentMethod.id
+        })
+
+        console.log('teste: ', confirmedCardPayment)
+
         setProcessingTo(false)
       } catch (error) {
         console.log(error)

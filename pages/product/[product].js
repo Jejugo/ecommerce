@@ -28,7 +28,6 @@ function product (props) {
 
   useEffect(() => {
     setShowcaseProduct(props.product)
-    console.log(props.product)
   }, [])
 
   return (

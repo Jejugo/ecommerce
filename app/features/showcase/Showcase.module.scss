@@ -19,25 +19,12 @@
 
   &__bigImage{
     flex: 3;
-    width: 80%;
-    overflow: hidden;
-  
+    width: 100%;
+
     &_item{
-      width: 500px;
-      height: 500px;
-      cursor: -moz-zoom-in; 
-      cursor: -webkit-zoom-in; 
-      cursor: zoom-in;
-      transition: transform .2s;
-
-      &:hover{
-        transform: scale(1.4)
-      }
+      width: 90%;
+      max-height: 300px;
     }
-  }
 
-  &__options{
-    flex: 2;
-    justify-content: center;
   }
 }

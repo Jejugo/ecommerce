@@ -14,17 +14,27 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+### Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+The project is made having folder organization in mind. The code was divided into several modules;
+- /assets: In there there will be static images and main `.scss` files.
+- /builder: Everything under this directory refers to functions that create or `build` an object, a variable, a string or whatever the app needs.
+- /components: Every global react component will be stored here.
+- /configs: All configuration and app global variables for different environments.
+- /context: All context Api functions that provides global state for their children components.
+- /features: Non global components that makes part of a "feature" inside the app.
+- /hoc: All higher order components (functions that wraps other functions).
+- /services: API calls organized in different contexts.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Page Folder
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Under Page folder we have directories for each page.
+- dashboard
+  - user-data
+- product
+  - [product-id]
+- purchase
+- verified
+  - [verified]
+- login.js
+- signup.js

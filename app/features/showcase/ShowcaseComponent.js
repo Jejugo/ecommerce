@@ -1,51 +1,41 @@
 import React, { useState, useEffect, useContext } from 'react'
 import styles from './Showcase.module.scss'
-import ProductSideOptions from './product-side-options/ProductSideOptions'
-import StripeCheckout from 'react-stripe-checkout'
-import { products } from '../../const/productsMock.json'
-import { AuthContext } from '../../context/AuthProvider'
+
 import { retrieveProduct } from '../../services/products'
 import { ProductsContext } from '../../context/ProductsProvider'
 
-
-const mockProducts = products
+import {
+  Magnifier,
+  GlassMagnifier,
+  SideBySideMagnifier,
+  PictureInPictureMagnifier,
+  MOUSE_ACTIVATION,
+  TOUCH_ACTIVATION,
+} from 'react-image-magnifiers'
+import PaymentCheckoutForm from '../purchase/payment/PaymentCheckoutForm'
 
 export default function ShowcaseComponent() {
-  const [quantity, setQuantity] = useState(1)
   const [productId, setProductId] = useState(null)
   const [product, setProduct] = useState(null)
 
-  const { user } = useContext(AuthContext)
   const { showcaseProduct } = useContext(ProductsContext)
 
   useEffect(() => {
-    const retrieveProductCall = async() => {
-        setProductId(showcaseProduct.id)
-        const { product } = await retrieveProduct(showcaseProduct.id)
-        setProduct(product)
+    const retrieveProductCall = async () => {
+      setProductId(showcaseProduct.id)
+      const { product } = await retrieveProduct(showcaseProduct.id)
+      setProduct(product)
     }
 
-    if(showcaseProduct){
+    if (showcaseProduct) {
       retrieveProductCall()
     }
+  }, [showcaseProduct])
 
-  }, [ showcaseProduct ])
+  const [status, setStatus] = useState('ready')
 
-  const handleToken = async (token) => {
-    const response = await fetch(`http://localhost:3002/checkout`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        token,
-        product, 
-        quantity,
-        address: user.address
-      }),
-    })
-
-    console.log(response)
+  if (status === 'success') {
+    return <div>Congrats on your empanadas!</div>
   }
 
   return (
@@ -65,27 +55,25 @@ export default function ShowcaseComponent() {
         ></img>
       </div>
       <div className={`${styles.productShowcase__bigImage} ${styles.flex}`}>
-        <img
-          className={styles.productShowcase__bigImage_item}
-          src={product && product.images[0]}
-        ></img>
-      </div>
-      <form>
-        <div
-          className={`${styles.productShowcase__options} ${styles.flex} ${styles.column} ${styles.itemCenter}`}
-        >
-          <ProductSideOptions
-            className={styles.productShowcase__options}
-            quantity={quantity}
-            setQuantity={setQuantity}
-            product={product}
+        {product && (
+          <Magnifier
+            className={`${styles.productShowcase__bigImage_item}`}
+            imageSrc={product.images[0]}
+            imageAlt="Product-Image"
+            largeImageSrc={product.images[0]} // Optional
+            mouseActivation={MOUSE_ACTIVATION.CLICK} // Optional
+            touchActivation={TOUCH_ACTIVATION.TAP} // Optional
+            dragToMove={true}
           />
-          <StripeCheckout
-            stripeKey="pk_test_51HEoDCLSuvyhvVGuVGvd1GXsbZcU9Emxxf6nhQfPEi6UAs4cCxTf13nLyt7opCsNY5tVKncLHtamN4NMbmkXaxRq00qzHCJ27T"
-            token={handleToken}
-          ></StripeCheckout>
-        </div>
-      </form>
+        )}
+      </div>
+
+      <PaymentCheckoutForm
+        success={() => {
+          setStatus('success')
+        }}
+        product={product}
+      />
     </div>
   )
 }

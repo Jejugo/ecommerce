@@ -1,0 +1,14 @@
+@import '../../assets/styles/main.scss';
+
+.modal{
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 350px;
+  height: 450px;
+  background-color: $white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  
+}

@@ -22,14 +22,14 @@ export default function ProductSideOptions({ quantity, setQuantity, product }) {
     <section className={`${styles.sideOptions} ${styles.flex}`}>
       <div className={styles.sideOptions__title}>
         <h1 className={styles.sideOptions__title_item}>
-          This is the title of the product
+          { product && product.name }
         </h1>
       </div>
       <hr className={styles.line}></hr>
       <div
         className={`${styles.sideOptions__price} ${styles.flex} ${styles.itemCenter} ${styles.column}`}
       >
-        <p className={styles.sideOptions__price_text}>R$10.00</p>
+        <p className={styles.sideOptions__price_text}>R$10</p>
         <div className={styles.sideOptions__price_quantity}>
           <div
             className={`${styles.flex} ${styles.column} ${styles.itemCenter} ${styles.center}`}

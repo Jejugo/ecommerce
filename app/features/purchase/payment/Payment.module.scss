@@ -1,0 +1,47 @@
+@import '../../../assets/styles/main.scss';
+
+.FormGroup {
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background-color: #fff;
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+.StripeElement {
+  width: 100%;
+  padding: 15px;
+}
+
+.FormRow {
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
+  width: 300px;
+  height: auto;
+}
+
+.FormRow:first-child {
+  border-top: none;
+}
+
+.FormRowLabel {
+  width: 15%;
+  min-width: 70px;
+  padding: 11px 0;
+  color: #c4f0ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.StripeElement--webkit-autofill {
+  background: transparent !important;
+}
+
+.StripeElement {
+  width: 100%;
+  padding: 11px 15px 11px 0;
+}

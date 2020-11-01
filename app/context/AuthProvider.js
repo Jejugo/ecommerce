@@ -28,7 +28,7 @@ export default function AuthProvider({ children }) {
           .then(res => loadUserDataToCache(res.data.customer))
           .catch(async err => {
             try{
-              console.log('getting refreshToken')
+              console.log('getting refreshToken...')
               const token = sessionStorage.getItem('refreshToken')
               const { data: { accessToken } } = await axios.post(`http://localhost:3002/refresh/token`, {
                 token

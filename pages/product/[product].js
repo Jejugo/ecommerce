@@ -5,6 +5,21 @@ import ShowcaseComponent from '../../app/features/showcase/ShowcaseComponent'
 import PageContainer from '../../app/components/layout/main-container/PageContainer'
 import { retrieveProduct } from '../../app/services/products'
 import { ProductsContext } from '../../app/context/ProductsProvider'
+import config from '../../app/configs'
+import { loadStripe } from '@stripe/stripe-js'
+import {
+  Elements
+} from '@stripe/react-stripe-js'
+
+const ELEMENTS_OPTIONS = {
+  fonts: [
+    {
+      cssSrc: 'https://fonts.googleapis.com/css?family=Roboto',
+    },
+  ],
+}
+
+const stripePromise = loadStripe(config.stripeKey)
 
 function product (props) {
 
@@ -13,10 +28,12 @@ function product (props) {
 
   useEffect(() => {
     setShowcaseProduct(props.product)
+    console.log(props.product)
   }, [])
 
   return (
     <main>
+      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <HeadComponent></HeadComponent>
       <Layout>
         <section>
@@ -25,6 +42,7 @@ function product (props) {
           </PageContainer>
         </section>
       </Layout>
+      </Elements>
     </main>
   )
 }
@@ -51,7 +69,7 @@ product.getInitialProps = async (ctx) => {
   console.log('pegando...')
   const id = ctx.query.product.split('-')[ctx.query.product.split('-').length - 1]
   const { product } = await retrieveProduct(id)
-
+  console.log(product)
   return {
     product
   }

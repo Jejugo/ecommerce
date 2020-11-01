@@ -1,0 +1,9 @@
+@import '../../../assets/styles/main.scss';
+
+.paymentForm{
+
+  &__options{
+    flex: 2;
+    justify-content: center;
+  }
+}

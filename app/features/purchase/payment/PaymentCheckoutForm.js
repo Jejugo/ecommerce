@@ -10,22 +10,20 @@ import PaymentMethodComponent from './Payment'
 
 export default function PaymentCheckoutForm({ success, product }) {
   const [togglePurchase, setTogglePurchase] = useState(false)
-  const [quantity, setQuantity] = useState(1)
-  const [isProcessing, setProcessingTo] = useState(false);
-  const [checkoutError, setCheckoutError] = useState();
+  const [amount, setAmount] = useState(1)
+  const [isProcessing, setProcessingTo] = useState(false)
+  const [checkoutError, setCheckoutError] = useState()
 
   const { user } = useContext(AuthContext)
 
   const stripe = useStripe()
   const elements = useElements()
 
-  const handleCardDetailsChange = ev => {
-    ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
-  };
+  const handleCardDetailsChange = (ev) => {
+    ev.error ? setCheckoutError(ev.error.message) : setCheckoutError()
+  }
 
-  
   const handleSubmit = async (e) => {
-    console.log('passou')
     e.preventDefault()
     setProcessingTo(true)
 
@@ -33,7 +31,7 @@ export default function PaymentCheckoutForm({ success, product }) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
       return
-    } 
+    }
 
     const billingDetails = {
       name: user.name,
@@ -46,7 +44,7 @@ export default function PaymentCheckoutForm({ success, product }) {
       }
     }
 
-    const cardElement = elements.getElement("card");
+    const cardElement = elements.getElement('card')
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
@@ -54,37 +52,38 @@ export default function PaymentCheckoutForm({ success, product }) {
       billing_details: billingDetails
     })
 
-
-    if(error){
+    if (error) {
       console.log(error)
-      setCheckoutError(error);
-      setProcessingTo(false);
-      return;
-    }
-
-    else {
+      setCheckoutError(error)
+      setProcessingTo(false)
+      return
+    } else {
       try {
         const data = await fetch('http://localhost:3002/checkout', {
           method: 'post',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            amount: quantity,
+            amount,
+            customer: {
+              ...billingDetails,
+              payment_method: paymentMethod.id
+            }
           })
         })
 
-        const { paymentIntent: { client_secret: clientSecret } }= await data.json()
-
+        const {
+          paymentIntent: { client_secret: clientSecret }
+        } = await data.json()
         const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
           payment_method: paymentMethod.id
         })
 
-        console.log('teste: ', confirmedCardPayment)
-
         setProcessingTo(false)
       } catch (error) {
-        console.log(error)
+        console.error(error)
+        setProcessingTo(false)
       }
     }
   }
@@ -97,12 +96,16 @@ export default function PaymentCheckoutForm({ success, product }) {
         >
           <ProductSideOptions
             className={styles.paymentForm__options}
-            quantity={quantity}
-            setQuantity={setQuantity}
+            amount={amount}
+            setAmount={setAmount}
             product={product}
-          />  
-          <button disable={isProcessing || !stripe} type="submit">{isProcessing ? "Processing..." : `Buy`}</button>
-          <PaymentMethodComponent handleCardDetailsChange={handleCardDetailsChange}></PaymentMethodComponent>
+          />
+          <button disabled={isProcessing || !stripe} type="submit">
+            {isProcessing ? 'Processing...' : `Buy`}
+          </button>
+          <PaymentMethodComponent
+            handleCardDetailsChange={handleCardDetailsChange}
+          ></PaymentMethodComponent>
         </div>
       </form>
     </div>

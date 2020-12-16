@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './ProductSideOptions.module.scss'
 
-const MINIMUN_QUANTITY = 1
+const MINIMUN_amount = 1
 
-export default function ProductSideOptions({ quantity, setQuantity, product }) {
-  const handleQuantity = (e) => {
+export default function ProductSideOptions({ amount, setAmount, product }) {
+  const handleAmount = (e) => {
     e.preventDefault()
     switch (e.target.name) {
-      case 'quantity_down':
-        if(quantity > MINIMUN_QUANTITY) {
-          setQuantity((prevState) => parseInt(prevState) - 1)
+      case 'amount_down':
+        if(amount > MINIMUN_amount) {
+          setAmount((prevState) => parseInt(prevState) - 1)
         }
         break
-      case 'quantity_up':
-        setQuantity((prevState) => parseInt(prevState) + 1)
+      case 'amount_up':
+        setAmount((prevState) => parseInt(prevState) + 1)
         break
     }
   }
@@ -30,31 +30,31 @@ export default function ProductSideOptions({ quantity, setQuantity, product }) {
         className={`${styles.sideOptions__price} ${styles.flex} ${styles.itemCenter} ${styles.column}`}
       >
         <p className={styles.sideOptions__price_text}>R$10</p>
-        <div className={styles.sideOptions__price_quantity}>
+        <div className={styles.sideOptions__price_amount}>
           <div
             className={`${styles.flex} ${styles.column} ${styles.itemCenter} ${styles.center}`}
-            onClick={handleQuantity}
+            onClick={handleAmount}
           >
             <a
-              className={styles.sideOptions__price_quantity_control}
-              name="quantity_down"
+              className={styles.sideOptions__price_amount_control}
+              name="amount_down"
             >
               -
             </a>
           </div>
           <input
-            className={styles.sideOptions__price_quantity_input}
+            className={styles.sideOptions__price_amount_input}
             type="text"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
           />
           <div
             className={`${styles.flex} ${styles.column} ${styles.itemCenter} ${styles.itemCenter}`}
-            onClick={handleQuantity}
+            onClick={handleAmount}
           >
             <a
-              className={styles.sideOptions__price_quantity_control}
-              name="quantity_up"
+              className={styles.sideOptions__price_amount_control}
+              name="amount_up"
             >
               +
             </a>

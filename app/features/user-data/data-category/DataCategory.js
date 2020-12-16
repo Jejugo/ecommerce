@@ -30,7 +30,6 @@ export default function DataCategory({ user }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    console.log(personalData, addressData)
     const newCustomer = builder.customer.newCustomerFromUserDataForm(personalData, addressData)
     try {
       await fetch(`http://localhost:3002/customer/${user.id}`, {

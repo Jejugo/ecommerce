@@ -65,10 +65,8 @@ function product (props) {
 // }
 
 product.getInitialProps = async (ctx) => {
-  console.log('pegando...')
   const id = ctx.query.product.split('-')[ctx.query.product.split('-').length - 1]
   const { product } = await retrieveProduct(id)
-  console.log(product)
   return {
     product
   }

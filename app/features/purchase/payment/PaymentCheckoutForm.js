@@ -72,13 +72,18 @@ export default function PaymentCheckoutForm({ success, product }) {
             }
           })
         })
-
+  
+        
         const {
           paymentIntent: { client_secret: clientSecret }
         } = await data.json()
-        const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
+        const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
           payment_method: paymentMethod.id
         })
+
+        if(paymentIntent){
+
+        }
 
         setProcessingTo(false)
       } catch (error) {

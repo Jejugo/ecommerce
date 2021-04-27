@@ -19,7 +19,6 @@ export default function ShowcaseComponent() {
   const [product, setProduct] = useState(null)
 
   const { showcaseProduct } = useContext(ProductsContext)
-
   useEffect(() => {
     const retrieveProductCall = async () => {
       setProductId(showcaseProduct.id)

@@ -10,11 +10,11 @@ import PaymentMethodComponent from './Payment'
 
 export default function PaymentCheckoutForm({ success, product }) {
   const [togglePurchase, setTogglePurchase] = useState(false)
-  const [amount, setAmount] = useState(1)
+  const [quantity, setQuantity] = useState(1)
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
 
-  const { user } = useContext(AuthContext)
+  const { user, setUser } = useContext(AuthContext)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -59,28 +59,38 @@ export default function PaymentCheckoutForm({ success, product }) {
       return
     } else {
       try {
+        console.log(user)
         const data = await fetch('http://localhost:3002/checkout', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            amount,
+            amount: quantity * product.price,
             customer: {
               ...billingDetails,
-              payment_method: paymentMethod.id
+              payment_method: paymentMethod.id,
+              stripeId: user.stripeId
             }
           })
         })
 
         const {
-          paymentIntent: { client_secret: clientSecret }
+          paymentIntent: { client_secret: clientSecret },
+          customer
         } = await data.json()
-        const confirmedCardPayment = await stripe.confirmCardPayment(clientSecret, {
-          payment_method: paymentMethod.id
-        })
 
-        setProcessingTo(false)
+        stripe.confirmCardPayment(clientSecret, {
+          payment_method: paymentMethod.id
+        }).then(() => setProcessingTo(false))
+
+        console.log(customer)
+
+        setUser((previousState) => ({
+          ...previousState,
+          stripeId: customer.stripeId
+        }))
+
       } catch (error) {
         console.error(error)
         setProcessingTo(false)
@@ -96,8 +106,8 @@ export default function PaymentCheckoutForm({ success, product }) {
         >
           <ProductSideOptions
             className={styles.paymentForm__options}
-            amount={amount}
-            setAmount={setAmount}
+            quantity={quantity}
+            setQuantity={setQuantity}
             product={product}
           />
           <button disabled={isProcessing || !stripe} type="submit">

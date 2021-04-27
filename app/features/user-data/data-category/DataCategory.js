@@ -26,6 +26,7 @@ export default function DataCategory({ user }) {
     { name: 'number', title: 'Número', value: user.address.number },
     { name: 'zipcode', title: 'CEP', value: user.address.zipcode },
     { name: 'complement', title: 'Complemento', value: user.address.complement },
+    //{ name: 'city', title: 'Cidade', value: user.address.city }, add to sequelize
   ])
 
   async function handleSubmit(e) {
@@ -47,12 +48,7 @@ export default function DataCategory({ user }) {
       setErrorMessage('Houve um erro no envio dos dados.')
       setToggleError(true)
     }
-
   }
-
-  useEffect(() => {
-
-  }, [ personalData, addressData ])
 
   return (
     <section className={styles.dataCategory}>

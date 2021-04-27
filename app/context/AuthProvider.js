@@ -15,6 +15,7 @@ export default function AuthProvider({ children }) {
 
   const loadUserDataToCache = customer => {
     if (customer){
+      console.log('configurando customer: ', customer)
       setUser(customer)
     } 
   }
@@ -104,7 +105,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, loading, login, logout }}
+      value={{ isAuthenticated: !!user, user, setUser, loading, login, logout }}
     >
       {children}
     </AuthContext.Provider>

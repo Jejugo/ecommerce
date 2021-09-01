@@ -12,7 +12,7 @@
     "@stripe/stripe-js": "^1.9.0",
     "axios": "^0.19.2",
     "js-cookie": "^2.2.1",
-    "next": "^10.0.0",
+    "next": "^11.1.1",
     "react": "16.13.1",
     "react-credit-cards": "^0.8.3",
     "react-dom": "16.13.1",
